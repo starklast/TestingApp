@@ -66,7 +66,18 @@ export function completeStage() {
     data['id'] = state.testDescription.id;
     console.log(Object.keys(state.answers));
     data['questions'] = Object.keys(state.answers).map((key) => {
-      return { id: key, answers: [state.answers[key]] };
+      return {
+        id: key,
+        answers: Object.keys(state.answers[key]).reduce((res, keyAnswer) => {
+          console.log(
+            `state.answers[key]=${state.answers[key]} keyAnswer=${keyAnswer}`
+          );
+          if (state.answers[key][keyAnswer]) {
+            res.push(keyAnswer);
+          }
+          return res;
+        }, []),
+      };
     });
 
     await testService.completeStage(data);

@@ -12,7 +12,9 @@ export default function StageButton() {
   const answers = store?.answers;
   let actionAvailable = false;
   if (questions && answers) {
-    actionAvailable = questions.every((item) => answers[item.id]);
+    actionAvailable = questions.every((item) =>
+      answers[item.id] ? Object.values(answers[item.id]).includes(true) : false
+    );
   }
   console.log(`actionAvailable = ${actionAvailable}`);
   return (

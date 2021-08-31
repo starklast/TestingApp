@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  FormControl,
   FormLabel,
-  RadioGroup,
   FormControlLabel,
-  Radio,
+  FormGroup,
+  Checkbox,
 } from '@material-ui/core';
 import { sendAnswer } from '../actions/answerActions';
 import './question.css';
 
 function Question({ data: { id, description, answers, completed } }) {
   const dispatch = useDispatch();
-  const answer = useSelector((state) => state.answers[id]);
+  const answer = useSelector((state) =>
+    state.answers[id] ? state.answers[id] : {}
+  );
   //const [answer, setAnswer] = React.useState('');
   console.log(`{ component Question } completed=${completed} answer=${answer}`);
 
   const handleChange = (event) => {
-    chancgeAnswer(event.target.value);
+    chancgeAnswer({ ...answer, [event.target.name]: event.target.checked });
   };
 
   const chancgeAnswer = (data) => {
@@ -28,14 +29,41 @@ function Question({ data: { id, description, answers, completed } }) {
   useEffect(() => {
     if (!completed) {
       //setAnswer('');
-      dispatch(sendAnswer({ id, data: '' }));
+      dispatch(sendAnswer({ id, data: {} }));
     }
   }, [id, completed, dispatch]);
   let classNameForAnswer = '';
   return (
     <div>
-      <FormControl disabled={completed} component='fieldset'>
-        {/* <FormControl component='fieldset'> */}
+      <FormGroup>
+        <FormLabel component='legend'>{description}</FormLabel>
+        {answers.map((item) => {
+          classNameForAnswer = '';
+          if (completed & answer[item.id] & item.correct) {
+            classNameForAnswer = 'correctAnswer';
+          } else if (completed & answer[item.id] & !item.correct) {
+            classNameForAnswer = 'wrongAnswer';
+          }
+          return (
+            <div key={item.id} className={classNameForAnswer}>
+              <FormControlLabel
+                disabled={completed}
+                control={
+                  <Checkbox
+                    checked={answer[item.id] || false}
+                    onChange={handleChange}
+                    name={item.id}
+                    color='primary'
+                  />
+                }
+                label={item.answer}
+              />
+            </div>
+          );
+        })}
+      </FormGroup>
+
+      {/*  <FormControl disabled={completed} component='fieldset'>
         <FormLabel component='legend'>{description}</FormLabel>
         <RadioGroup
           aria-label='qustion'
@@ -66,7 +94,7 @@ function Question({ data: { id, description, answers, completed } }) {
             );
           })}
         </RadioGroup>
-      </FormControl>
+      </FormControl> */}
     </div>
   );
 }
