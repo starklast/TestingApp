@@ -23,6 +23,26 @@ class TaskService {
 
     return Test;
   });
+  getTestByIDWhithAnswers = asyncHandler(async (id) => {
+    const Test = await testsModel
+      .findById(id)
+      /*       .populate({
+        path: 'testStages',
+        populate: { path: 'testStage' },
+      }) */
+      .populate({
+        path: 'testStages',
+        populate: {
+          path: 'testStage',
+          populate: { path: 'questions', populate: { path: 'question' } },
+        },
+      });
+    if (!Test) {
+      throw new Error("Can't finde test");
+    }
+
+    return Test;
+  });
 
   getTestStageByID = asyncHandler(async (id) => {
     const testStage = await testStagesModel.findById(id).populate({
@@ -49,6 +69,11 @@ class TaskService {
     );
 
     return res;
+  });
+
+  getAnswers = asyncHandler(async (id) => {
+    const answers = await testLog.find({ startingTest: id });
+    return answers;
   });
 
   getQuestionByID = asyncHandler(async (id) => {
@@ -84,6 +109,19 @@ class TaskService {
       startTime: new Date(),
     });
     return sTest;
+  });
+
+  stopTest = asyncHandler(async (id) => {
+    const query = { _id: id };
+    await startingTestsModel.findOneAndUpdate(
+      query,
+      {
+        endTime: new Date(),
+        completed: true,
+      },
+      { useFindAndModify: false }
+    );
+    return true;
   });
 
   completCurrentStage = asyncHandler(async (id) => {

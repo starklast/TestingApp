@@ -4,11 +4,12 @@ const testController = require('../controllers/testController');
 
 router.get('/getRandomTest', testController.getRandomTest);
 router.post('/startTest', testController.startTest);
-router.get('/getNextTestStage', testController.getQuestionsNextStage);
+router.get('/getNextTestStage/:id', testController.getQuestionsNextStage);
 router.post('/completCurrentStage', testController.completCurrentStage);
 router.get(
-  '/getStageWhithAnswers',
+  '/getStageWhithAnswers/:id',
   testController.getStageQuestionsWhithAnswers
 );
+router.get('/getTestResult/:id', testController.getTestResult);
 
 module.exports = router;

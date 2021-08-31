@@ -1,0 +1,7 @@
+.correctAnswer {
+  border: solid blue;
+}
+
+.wrongAnswer {
+  border: solid red;
+}
