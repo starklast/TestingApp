@@ -39,10 +39,12 @@ function Question({ data: { id, description, answers, completed } }) {
         <FormLabel component='legend'>{description}</FormLabel>
         {answers.map((item) => {
           classNameForAnswer = '';
-          if (completed & answer[item.id] & item.correct) {
+          if (completed && answer[item.id] && item.correct) {
             classNameForAnswer = 'correctAnswer';
-          } else if (completed & answer[item.id] & !item.correct) {
+          } else if (completed && answer[item.id] && !item.correct) {
             classNameForAnswer = 'wrongAnswer';
+          } else if (completed && !answer[item.id] && item.correct) {
+            classNameForAnswer = 'correctAnswer';
           }
           return (
             <div key={item.id} className={classNameForAnswer}>
