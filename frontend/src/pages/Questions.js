@@ -6,6 +6,7 @@ import Question from '../components/Question';
 import { getPathByName } from '../routes/';
 import { RESULT, HOME } from '../constants/';
 import StageButton from '../components/StageButton';
+import Timer from '../components/Timer';
 
 function Questions() {
   const history = useHistory();
@@ -40,6 +41,7 @@ function Questions() {
   const { completed } = stepData;
   return (
     <div>
+      <Timer />
       <div>{stepData.description}</div>
       <div>
         {stepData.questions.map((item, index) => (

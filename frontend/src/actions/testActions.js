@@ -22,12 +22,12 @@ export function getNewTest() {
 export function startTestAction(testId) {
   return async (dispatch, getState) => {
     dispatch({ type: LOADING });
-    const { id } = await testService.startTest(testId);
+    const { id, startTime } = await testService.startTest(testId);
     const testStage = await testService.getNextTestStage(id);
 
     dispatch({
       type: STARTTEST,
-      payload: { started: true, id, testStage },
+      payload: { started: true, id, startTime, testStage },
     });
     dispatch({ type: LOADINGCOMPLETE });
   };
