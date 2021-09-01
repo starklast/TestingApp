@@ -2,6 +2,7 @@
 export const HOME = 'HOME';
 export const QUESTIONS = 'QUESTIONS';
 export const RESULT = 'RESULT';
+export const ADMIN = 'ADMIN';
 
 //actions
 export const LOADING = 'LOADING';

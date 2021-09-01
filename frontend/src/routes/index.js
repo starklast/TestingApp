@@ -1,8 +1,9 @@
 import Home from '../pages/Home';
 import Questions from '../pages/Questions';
 import Result from '../pages/Result';
+import Admin from '../pages/Admin';
 
-import { HOME, QUESTIONS, RESULT } from '../constants';
+import { HOME, QUESTIONS, RESULT, ADMIN } from '../constants';
 export const routes = [
   {
     pageName: HOME,
@@ -21,6 +22,12 @@ export const routes = [
     title: 'RESULT',
     path: '/result',
     component: Result,
+  },
+  {
+    pageName: ADMIN,
+    title: 'ADMIN',
+    path: '/admin',
+    component: Admin,
   },
 ];
 export const getPathByName = (name) => {
