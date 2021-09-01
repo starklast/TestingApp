@@ -64,39 +64,6 @@ function Question({ data: { id, description, answers, completed } }) {
           );
         })}
       </FormGroup>
-
-      {/*  <FormControl disabled={completed} component='fieldset'>
-        <FormLabel component='legend'>{description}</FormLabel>
-        <RadioGroup
-          aria-label='qustion'
-          name='qustion'
-          value={answer ? answer : ''}
-          onChange={handleChange}
-        >
-          {answers.map((item, index) => {
-            classNameForAnswer = '';
-            if (completed & (answer === item.id) & item.correct) {
-              classNameForAnswer = 'correctAnswer';
-            } else if (completed & (answer === item.id) & !item.correct) {
-              classNameForAnswer = 'wrongAnswer';
-            }
-            return (
-              <div key={item.id} className={classNameForAnswer}>
-                <FormControlLabel
-                  value={item.id}
-                  color={
-                    completed && answer === item.id && item.correct
-                      ? 'primary'
-                      : 'secondary'
-                  }
-                  control={<Radio />}
-                  label={item.answer}
-                />
-              </div>
-            );
-          })}
-        </RadioGroup>
-      </FormControl> */}
     </div>
   );
 }
