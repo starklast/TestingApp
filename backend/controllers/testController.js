@@ -34,15 +34,6 @@ class TestController {
           (sum, { question }) =>
             (sum += question.answers.every((answer) => {
               if (answer.correct) {
-                /* console.log(testLog);
-                console.log(question.id); */
-
-                /*  console.log(
-                  testLog.find(
-                    (testLogItem) => testLogItem.question == question.id
-                  )
-                ); */
-                //return true;
                 const logAnswers = testLog.find(
                   (testLogItem) => testLogItem.question == question.id
                 );
