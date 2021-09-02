@@ -6,12 +6,12 @@ function Timer() {
 
   useEffect(() => {
     const timerId = setInterval(() => {
-      setTimer((timer) => timer + 1000);
+      setTimer(() => new Date() - new Date(startTime));
     }, 1000);
     return () => {
       clearInterval(timerId);
     };
-  }, []);
+  }, [startTime]);
   if (!startTime) {
     return <></>;
   }
