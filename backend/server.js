@@ -6,7 +6,6 @@ const cors = require('cors');
 
 const adminRoutes = require('./routes/adminRoutes');
 const testRoutes = require('./routes/testRoutes');
-
 /* const authRoutes = require('./routes/authRoutes')
 const usersRoutes = require('./routes/usersRoutes')
 const taskRoutes = require('./routes/taskRoutes')
@@ -24,6 +23,7 @@ app.use(
     origin: process.env.CLIENT_URL,
   })
 );
+
 app.use('/api/admin', adminRoutes);
 app.use('/api/tests', testRoutes);
 
