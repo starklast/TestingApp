@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { testService } from '../api/server';
+import ViewTest from '../components/ViewTest/';
 
 function Admin() {
   const [selectedFile, setSelectedFile] = useState();
@@ -62,6 +63,8 @@ function Admin() {
           <p>
             {`lastModifiedDate: ${selectedFile.lastModifiedDate.toLocaleDateString()}`}
           </p>
+
+          <ViewTest testData={fileData} />
         </div>
       ) : (
         <p>Select a file to show details</p>
